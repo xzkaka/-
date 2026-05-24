@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的私人日记小窝</title>
+    <title>Crazy Space</title>
     <style>
         /* 基础样式重置 */
         * {
@@ -209,6 +209,17 @@
             transform: rotate(1.2deg);
             width: 280px;
         }
+        .paper-card {
+        /* ... 你原本的其他样式 ... */
+            max-height: 250px;       /* 限制卡片的最大高度，再长的日记也不会撑爆网页 */
+            overflow-y: auto;        /* 内容变长时，自动允许上下滚动 */
+            padding-right: 15px;     /* 留出一点右边距，防止字贴着滚动条 */
+        }
+
+/* 隐藏自带的丑丑的灰色滚动条，保持手账纯净感 */
+       .paper-card::-webkit-scrollbar {
+            width: 0px; 
+        }
 
         /* 响应式设计：小屏幕自动变单栏 */
         @media (max-width: 900px) {
@@ -250,24 +261,24 @@
             
             <!-- 备忘录便签纸（绑了 id="my-memo"） -->
             <div class="memo-note" id="my-memo">
-                <div class="memo-title">📌 今日碎碎念 / TODO</div>
+                <div class="memo-title">📌 Reminder / TODO</div>
                 <div class="memo-item">
-                    <input type="checkbox" id="m1" checked> <label for="m1">给阳台的花浇水 🌿</label>
+                    <input type="checkbox" id="m1" checked> <label for="m1">Organize oneself</label>
                 </div>
                 <div class="memo-item">
-                    <input type="checkbox" id="m2"> <label for="m2">在 Canva 里面画新的小贴纸</label>
+                    <input type="checkbox" id="m2"> <label for="m2">Listen to more music</label>
                 </div>
                 <div class="memo-item">
-                    <input type="checkbox" id="m3"> <label for="m3">晚上写一篇复古风日记 ✍️</label>
+                    <input type="checkbox" id="m3"> <label for="m3">Stretching the mood</label>
                 </div>
                 <div class="memo-item">
-                    <input type="checkbox" id="m4"> <label for="m4">喝足 2000ml 水！</label>
+                    <input type="checkbox" id="m4"> <label for="m4">and....</label>
                 </div>
             </div>
 
             <!-- 复古绿日记分类栏（绑了 id="my-categories"） -->
             <div class="sidebar-box" id="my-categories">
-                <h3>📅 日记分类</h3>
+                <h3>📅(•̀ᴗ•́)و ̑̑）</h3>
                 <ul>
                     <!-- 这里鼠标放上去已经是可爱的小手啦！ -->
                     <li>✨ 生活日常 (12)</li>
