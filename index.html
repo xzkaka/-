@@ -215,14 +215,20 @@
         }
         .paper-card {
         /* ... 你原本的其他样式 ... */
-            max-height: 250px;       /* 限制卡片的最大高度，再长的日记也不会撑爆网页 */
-            overflow-y: auto;        /* 内容变长时，自动允许上下滚动 */
+                  /* 限制卡片的最大高度，再长的日记也不会撑爆网页 */
+                  /* 内容变长时，自动允许上下滚动 */
             padding-right: 15px;     /* 留出一点右边距，防止字贴着滚动条 */
         }
 
 /* 隐藏自带的丑丑的灰色滚动条，保持手账纯净感 */
        .paper-card::-webkit-scrollbar {
-            width: 0px; 
+            width: 100px; 
+        }
+        #diary-display {
+        white-space: pre-wrap; /* 保留换行 */
+        line-height: 1.8;
+        font-family: inherit;
+        transition: all 0.5s ease; /* 让内容出现时有个顺滑的过程 */
         }
 
         /* 响应式设计：小屏幕自动变单栏 */
@@ -244,7 +250,7 @@
 
     <!-- 顶部分离式导航栏（使用 # 号关联到下方区块的 id） -->
     <nav class="handbook-nav">
-        <a href="#my-handbook" class="nav-tag">📖 A place to write casually</a>
+        <a href="#diary-section" class="nav-tag">📖 A place to write casually</a>
         <a href="#my-memo" class="nav-tag">📌 Interested websites</a>
         <a href="#my-categories" class="nav-tag">✨ Accumulation of Inspiration</a>
     </nav>
@@ -291,8 +297,9 @@
                     <li>✈️ journey (4)</li>
                 </ul>
             </div>
-            <div class="paper-card card-diary1 tape-style">
-                <h4>🧸 2026年5月19日 · 晴</h4>
+            <div id="diary-section" class="paper-card card-diary1 tape-style"style="max-height: none; overflow: visible;">
+                <h4>🧸 2026年5月19日 · sunny</h4>
+                <div id="diary-display">open...</div>
               <!-- 用 iframe 把独立的文本文件无缝嵌入进来 -->
               <iframe src="diary0519.txt" style="width:100%; height:180px; border:none; background:transparent;"></iframe>
            </div>
