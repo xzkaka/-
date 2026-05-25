@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>My Diary - Crazy Space</title>
+    <style>
+        @font-face {
+            font-family: 'english'; 
+            src: url('english.otf') format('opentype');
+        }
+        body {
+            background: #fefaf3;
+            font-family: 'english', "STKaiti", sans-serif;
+            padding: 50px;
+            color: #5a4b41;
+        }
+        .diary-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            line-height: 2;
+        }
+        .back-home {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #aa8c74;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-home">← back</a>
+    <div class="diary-container">
+        <h1>🧸 2026年5月19日 ·sunny</h1>
+        <div id="full-diary-content">loading...</div>
+    </div>
+
+    <script>
+        // 同样可以用 fetch 读取那个 txt 文件，或者直接把字写在这里
+        fetch('diary0519.txt')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('full-diary-content').innerText = data;
+            });
+    </script>
+</body>
+</html>
