@@ -181,7 +181,7 @@
         }
 
         /* --- Canva 组件绝对定位微调 --- */
-        .canva-polaroid {
+        .canva-polaroid1{
             position: absolute;
             top: 20px;
             left: 2%;
@@ -211,6 +211,16 @@
             right: 0%;
             transform: rotate(1.2deg);
             width: 280px;
+        }
+        .canva-polaroid2 {
+            position: absolute;
+            bottom: 20px;
+            left: 2%;
+            transform: rotate(-3deg);
+            width: 260px;
+            box-shadow: 5px 8px 20px rgba(0,0,0,0.12);
+            border: 10px solid #fff; 
+            border-bottom: 35px solid #fff;
         }
         .paper-card {
         /* ... 你原本的其他样式 ... */
@@ -249,10 +259,11 @@
     }
 
         .canvas-area a:hover {
-           .canva-polaroid:hover { transform: rotate(-3deg) scale(1.05); }
+           .canva-polaroid1:hover { transform: rotate(-3deg) scale(1.05); }
            .canva-note1:hover { transform: rotate(2.5deg) scale(1.05); }
            .canva-note2:hover { transform: rotate(-1.8deg) scale(1.05); }
            .canva-note3:hover { transform: rotate(1.2deg) scale(1.05); }
+            .canva-polaroid1:hover { transform: rotate(1deg) scale(1.05); }
     }
        
     
@@ -273,7 +284,7 @@
         <!-- 左侧：Canva 手账画布区（绑了 id="my-handbook"） -->
         <div class="canvas-area" id="my-handbook">
             <a href="photo.html">
-                <img class="canva-polaroid" src="images/view2.jpg" width="260" loading="lazy" alt="Photo Album">
+                <img class="canva-polaroid1" src="images/view2.jpg" width="260" loading="lazy" alt="Photo Album">
             </a>
             <a href="delicious.html">
                 <img class="canva-note1" src="images/noddles2.jpg" width="260" loading="lazy" alt="Delicious Food">
@@ -282,7 +293,7 @@
                 <img class="canva-note2" src="images/sea2.jpg" width="260" loading="lazy" alt="Journey Memory">
             </a>
             <a href="photo.html">
-                <img class="canva-polaroid" src="images/train1.jpg" width="260" loading="lazy" alt="Photo Album">
+                <img class="canva-polaroid2" src="images/train1.jpg" width="260" loading="lazy" alt="Photo Album">
             </a>
             
            
