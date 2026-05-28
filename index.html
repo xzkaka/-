@@ -244,6 +244,27 @@
                 justify-content: center;
             }
         }
+        .canvas-area a {
+            display: inline-block;
+            transition: transform 0.3s ease;
+    }
+
+        .canvas-area a:hover {
+            transform: scale(1.05); /* 稍微放大一点 */
+            filter: brightness(1.1); /* 稍微变亮一点 */
+            cursor: pointer;
+    }
+
+/* 首页精简：如果只想展示部分照片，可以通过类名控制显示 */
+        .home-only {
+            display:inline-block;
+            vertical-align: top;
+            transition: transform 0.3s ease;
+            
+    }
+        .hidden-on-home {
+            display: none; /* 可以在主页隐藏一些太长的内容 */
+    }
     </style>
 </head>
 <body>
@@ -298,10 +319,10 @@
                 <h3>📅(•̀ᴗ•́)و ̑̑）</h3>
                 <ul>
                     <!-- 这里鼠标放上去已经是可爱的小手啦！ -->
-                    <li>🎨 Record casually </li>
-                    <li>📸 photo album </li>
-                    <li>🥘 delicious food </li>
-                    <li>✈️ journey </li>
+                    <li><a href="diary.html" style="text-decoration:none; color:inherit;">🎨 Record casually </a></li>
+                    <li><a href="photo.html" style="text-decoration:none; color:inherit;">📸 photo album </a></li>
+                    <li><a href="delicious.html" style="text-decoration:none; color:inherit;">🥘 delicious food </a></li>
+                    <li><a href="journey.html" style="text-decoration:none; color:inherit;">✈️ journey </a></li>
                 </ul>
             </div>
             <div id="diary-section" class="paper-card card-diary1 tape-style"style="max-height: none; overflow: visible;">
