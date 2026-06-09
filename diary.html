@@ -2,54 +2,108 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>My Diary</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Diary - Crazy Space</title>
     <style>
+        /* 1. 声明自定义字体（修正拼写并剥离多余样式） */
         @font-face {
             font-family: 'bold'; 
-            src: url('bold.ttf') format('turetype');
-            font-size: 2rem;
-            color: #aa8c74;
-            margin-bottom: 30px;
-            border-bottom: 2px dashed #e9d8c8;
-            padding-bottom: 10px;
+            src: url('bold.ttf') format('truetype'); /* 修正为 truetype */
+            font-weight: normal;
+            font-style: normal;
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background: #fefaf3;
-            font-family: 'bold', "STKaiti", sans-serif;
-            padding: 50px;
+            /* 延续与主页一致的字体调用序列 */
+            font-family: 'bold', "STKaiti", "Kaiti SC", "PingFang SC", cursive, sans-serif;
+            padding: 60px 20px;
             color: #5a4b41;
+            /* 延续温馨的复古背景底纹 */
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23e9d8c8' fill-opacity='0.25' fill-rule='evenodd'/%3E%3C/svg%3E");
         }
-        .diary-container {
-            
+
+        /* 统一包装盒容器 */
+        .wrapper {
             max-width: 800px;
             margin: 0 auto;
-            background: #fff;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border-radius: 8px;
-            line-height: 2;
         }
+
+        /* 带悬停反馈的返回按钮 */
         .back-home {
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             text-decoration: none;
             color: #aa8c74;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: transform 0.2s ease;
+        }
+        .back-home:hover {
+            transform: translateX(-5px); /* 悬停时往左探一点，很有细节感 */
+        }
+
+        /* 日记卡片主体 */
+        .diary-container {
+            background: #fff;
+            padding: 50px 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            border-radius: 4px;
+            border: 1px solid #f0e6da;
+        }
+
+        /* 2. 将原本错写在@font-face里的样式重新分配给正确的 h1 标签 */
+        h1 {
+            font-family: 'bold', "STKaiti", sans-serif;
+            font-size: 1.6rem;
+            color: #aa8c74;
+            margin-bottom: 35px;
+            border-bottom: 2px dashed #e9d8c8;
+            padding-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        /* 3. 日记文本排版优化 */
+        #full-diary-content {
+            white-space: pre-wrap; /* 保留 txt 文件里的段落换行 */
+            font-size: 1.05rem;
+            color: #5a4b41;
+            /* 关键升级：为日记内页添加复古横线，行高与横线完美对齐 */
+            line-height: 2.2rem;
+            background-image: linear-gradient(#e8e3cf 1px, transparent 1px);
+            background-size: 100% 2.2rem;
+            padding-top: 5px;
         }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-home">← back</a>
-    <div class="diary-container">
-        <h1>🧸 2026年5月19日 ·sunny</h1>
-        <div id="full-diary-content">loading...</div>
+
+    <div class="wrapper">
+        <a href="index.html" class="back-home">← back to space</a>
+        
+        <div class="diary-container">
+            <h1>🧸 2026/5/19 </h1>
+            <div id="full-diary-content">loading...</div>
+        </div>
     </div>
 
     <script>
-        // 同样可以用 fetch 读取那个 txt 文件，或者直接把字写在这里
         fetch('diary0519.txt')
-            .then(res => res.text())
+            .then(res => {
+                if(!res.ok) throw new Error();
+                return res.text();
+            })
             .then(data => {
                 document.getElementById('full-diary-content').innerText = data;
+            })
+            .catch(() => {
+                document.getElementById('full-diary-content').innerText = "Oops! 文本读取失败，请检查 main 分支根目录下是否存在 diary0519.txt 文件。";
             });
     </script>
 </body>
