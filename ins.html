@@ -1,42 +1,176 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Interesting website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interested Websites </title>
     <style>
+        /* 1. 声明并修正自定义字体 */
         @font-face {
             font-family: 'bold'; 
-            src: url('bold.ttf') format('turetype');
+            src: url('bold.ttf') format('truetype');
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background: #fefaf3;
-            font-family: 'bold', "STKaiti", sans-serif;
-            padding: 50px;
+            /* 延续全站统一的手账字体调用序列 */
+            font-family: 'bold', "STKaiti", "Kaiti SC", "PingFang SC", cursive, sans-serif;
+            padding: 60px 20px;
             color: #5a4b41;
+            /* 延续温馨的复古背景底纹 */
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23e9d8c8' fill-opacity='0.25' fill-rule='evenodd'/%3E%3C/svg%3E");
         }
-        .diary-container {
-            max-width: 800px;
+
+        .wrapper {
+            max-width: 1000px;
             margin: 0 auto;
-            background: #fff;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border-radius: 8px;
-            line-height: 2;
         }
+
+        /* 返回首页按钮 */
         .back-home {
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             text-decoration: none;
             color: #aa8c74;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: transform 0.2s ease;
+        }
+        .back-home:hover {
+            transform: translateX(-5px);
+        }
+
+        /* 页面大标题 */
+        .page-title {
+            font-size: 2rem;
+            color: #aa8c74;
+            margin-bottom: 40px;
+            border-bottom: 2px dashed #e9d8c8;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+
+        /* 2. 核心网格：卡片规则整齐排列，每行自动填充 */
+        .website-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* 3. 手账撕纸便签卡片效果 */
+        .site-card {
+            background: #fff;
+            padding: 25px 20px;
+            box-shadow: 4px 8px 20px rgba(0,0,0,0.04);
+            border-bottom: 3px solid #e0d0c0;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 180px;
+        }
+
+        /* 给卡片分配微小的不同旋转角度，打破死板，创造手账感 */
+        .site-card:nth-child(3n+1) { transform: rotate(-1.5deg); background: #fffdf3; border-radius: 20px 15px 30px 12px/12px 25px 12px 30px; }
+        .site-card:nth-child(3n+2) { transform: rotate(1deg); background: #f4f9f4; border-radius: 15px 225px 15px 255px/255px 15px 225px 15px; }
+        .site-card:nth-child(3n+3) { transform: rotate(-1deg); background: #fff5f5; border-radius: 255px 15px 225px 15px/15px 225px 15px 255px; }
+
+        /* 悬停放大提亮效果 */
+        .site-card:hover {
+            transform: scale(1.05) rotate(0deg) !important;
+            box-shadow: 6px 12px 25px rgba(0,0,0,0.08);
+            background: #fff;
+        }
+
+        /* 卡片内部链接样式 */
+        .site-link {
+            font-size: 1.25rem;
+            color: #6e5a4e;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed rgba(110, 90, 78, 0.2);
+            padding-bottom: 5px;
+        }
+        .site-link:hover {
+            color: #aa8c74;
+        }
+
+        /* 简介文本 */
+        .site-desc {
+            font-size: 0.95rem;
+            color: #7a6b60;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            flex-grow: 1; /* 让简介占据主要空间 */
+        }
+
+        /* 推荐指数等标签底栏 */
+        .site-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #aa8c74;
+            border-top: 1px solid rgba(0,0,0,0.03);
+            padding-top: 10px;
+        }
+        .stars {
+            color: #e3a857;
         }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-home">← back</a>
-    <div class="diary-container">
-      <a href="https://aidn.jp/mikutap/" target="_blank">music interaction</a>
+
+    <div class="wrapper">
+        <a href="index.html" class="back-home">← back to space</a>
+        
+        <h1 class="page-title">📌 Interested Websites Collection</h1>
+
+        <div class="website-grid">
+
+            <div class="site-card">
+                <div>
+                    <a href="https://aidn.jp/mikutap/" target="_blank" class="site-link">🎵 Mikutap</a>
+                    <p class="site-desc">Music interactive decompression website, just click or slide the mouse on the screen at will, and you can follow the voice of the Hatsune Miku to play a wonderful electronic rhythm</p>
+                </div>
+                <div class="site-meta">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span># interactive music</span>
+                </div>
+            </div>
+
+            <div class="site-card">
+                <div>
+                    <a href="https://quickdraw.withgoogle.com/" target="_blank" class="site-link">🎨 Quick, Draw!</a>
+                    <p class="site-desc">The AI guessing drawing game launched by Google. You need to draw the specified item within 20 seconds and see if the artificial intelligence can guess what you are drawing online.</p>
+                </div>
+                <div class="site-meta">
+                    <span class="stars">⭐⭐⭐⭐</span>
+                    <span># AI Game</span>
+                </div>
+            </div>
+
+            <div class="site-card">
+                <div>
+                    <a href="https://www.geoguessr.com/" target="_blank" class="site-link">🌍 GeoGuessr</a>
+                    <p class="site-desc">Randomly toss you into Google Street View in a corner of the world, where you need to guess where you are based on the surrounding buildings, plants, and landmarks.</p>
+                </div>
+                <div class="site-meta">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span># Geographical exploration </span>
+                </div>
+            </div>
+
+            
     </div>
 
-  
 </body>
 </html>
