@@ -1,1 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey Memory - My Space</title>
+    <style>
+        /* 1. 声明并统一你的自定义字体 */
+        @font-face {
+            font-family: 'bold'; 
+            src: url('bold.ttf') format('truetype'); 
+            font-weight: normal;
+            font-style: normal;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #fefaf3;
+            /* 延续全站的手账字体序列 */
+            font-family: 'bold', "PingFang SC", "STKaiti", "Kaiti SC", cursive, sans-serif;
+            padding: 40px 20px;
+            color: #5a4b41;
+            /* 延续全站温馨的背景底纹 */
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23e9d8c8' fill-opacity='0.25' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* 返回首页按钮 */
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: #aa8c74;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            transition: transform 0.2s ease;
+        }
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+
+        /* 大标题 */
+        header h1 {
+            font-size: 2rem;
+            color: #aa8c74;
+            margin-bottom: 40px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        /* 旅行手账照片大卡片群 */
+        .journey-list {
+            display: flex;
+            flex-direction: column;
+            gap: 60px; /* 卡片之间的间距 */
+        }
+
+        /* 📸 单张旅行照片复合卡片结构（核心布局） */
+        .journey-card {
+            background: #fff;
+            border-radius: 4px;
+            padding: 35px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            border: 1px solid #f0e6da;
+            
+            /* 使用 Grid 网格：左侧备注(200px) | 中间全图(1fr) | 右侧备注(200px) */
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            gap: 25px;
+            align-items: center; /* 垂直居中对齐两侧备注 */
+        }
+
+        /* 左侧与右侧的备注标记样式 */
+        .side-note {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #8a7364;
+            padding: 15px;
+            background: #fffdf7;
+            border: 1px dashed #e9d8c8;
+            border-radius: 6px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+        }
+        .note-left {
+            transform: rotate(-1.5deg); /* 微微倾斜制造手账粘贴感 */
+        }
+        .note-right {
+            transform: rotate(1.5deg);
+        }
+
+        /* 中间全图区域 */
+        .image-display {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fdfcf7;
+            padding: 8px;
+            border: 1px solid #eee;
+        }
+        .image-display img {
+            width: 100%;
+            height: auto;
+            max-height: 500px; /* 限制全图最大高度，防止纵向拉得过长 */
+            object-fit: contain; /* 确保图片完整不被裁剪 */
+            display: block;
+        }
+
+        /* 底部时间和位置信息（横跨整张卡片底部） */
+        .card-footer {
+            grid-column: 1 / span 3; /* 让底部撑满三列宽度 */
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #e9d8c8;
+            display: flex;
+            justify-content: space-between; /* 时间居左，位置居右 */
+            align-items: center;
+            color: #aa8c74;
+            font-size: 1.05rem;
+            font-weight: bold;
+        }
+        .info-time {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .info-location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: #fdf5ec;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        /* 📱 响应式适配：在平板或手机上自动转化为适合单手浏览的优雅单栏 */
+        @media (max-width: 850px) {
+            .journey-card {
+                grid-template-columns: 1fr; /* 变成单栏 */
+            }
+            .card-footer {
+                grid-column: 1;
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            .info-location {
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Space</a>
+
+        <header>
+            <h1>✈️ Journey Memories</h1>
+        </header>
+
+        <main class="journey-list">
+
+            <div class="journey-card">
+                <div class="side-note note-left">
+                    🌊 吹着咸咸的海风，看着层层叠叠的浪花拍打着海岸，那一刻心里所有的烦恼好像都被消融掉了。
+                </div>
+
+                <div class="image-display">
+                    <img src="images/sea2.jpg" alt="江陵的大海">
+                </div>
+
+                <div class="side-note note-right">
+                    📝 这里的海格外的蓝，沙滩也很干净。抓拍到了远处泛起的白浆，用镜头留住一整片治愈的夏天。
+                </div>
+
+                <div class="card-footer">
+                    <div class="info-time">📅 2026年5月19日 · sunny</div>
+                    <div class="info-location">📍 江原道 · 江陵海边</div>
+                </div>
+            </div>
+
+            <div class="journey-card">
+                <div class="side-note note-left">
+                    🤳 举起手机把远处的地平线放进相框，波光粼粼的海面在阳光下闪闪发光。
+                </div>
+
+                <div class="image-display">
+                    <img src="images/sea4.jpg" alt="海边剪影">
+                </div>
+
+                <div class="side-note note-right">
+                    📌 傍晚落日前的最后一道温柔。照片右下角的礁石很有质感。下次还要和重要的人一起来！
+                </div>
+
+                <div class="card-footer">
+                    <div class="info-time">📅 2026年5月20日 · cloudy</div>
+                    <div class="info-location">📍 沿海公路瞭望台</div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>
