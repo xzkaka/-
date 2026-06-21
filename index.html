@@ -377,8 +377,24 @@
     <script>
         // 存储当前被选中的日记的底层内容，方便修改
         let isEditing = false;
+        let customDiaries = JSON.parse(localStorage.getItem('my_saved_diaries')) || [];
+        window.addEventListener('DOMContentLoaded', () => {
+            const menuList = document.getElementById('diary-log-menu');
+            customDiaries.forEach(diary => {
+                const newLi = document.createElement('li');
+                const safeText = diary.text.replace(/'/g, "\\'").replace(/\n/g, "\\n");
+                newLi.setAttribute('onclick', `switchDiary('${diary.date}', '${diary.weather}', '${safeText}')`);
+                const weatherIcon = diary.weather.split(' ')[0];
+                newLi.innerHTML = `📜 ${diary.date} · ${weatherIcon} New Log`;
+                menuList.insertBefore(newLi, menuList.firstChild);
+            });
+            if(customDiaries.length > 0) {
+                const latest = customDiaries[customDiaries.length - 1];
+                switchDiary(latest.date, latest.weather, latest.text);
+            }
+        });
 
-        // 1. 局部无缝刷新日记的方法（带天气支持）
+        //  局部无缝刷新日记的方法
         function switchDiary(date, weather, text) {
             // 如果处于编辑状态，切换时强行先关闭编辑
             if (isEditing) toggleEditDiary();
@@ -388,7 +404,7 @@
             document.getElementById('diary-display-area').innerText = text;
         }
 
-        // 2. ✨ 新增：控制“编辑/保存”状态切换的方法
+        //控制“编辑/保存”状态切换的方法
         function toggleEditDiary() {
             const displayArea = document.getElementById('diary-display-area');
             const editInput = document.getElementById('diary-edit-input');
@@ -413,9 +429,16 @@
                 displayArea.style.display = 'block';
                 actionBtn.innerText = '✍️ Edit';
                 isEditing = false;
+                let targetIndex = customDiaries.findIndex(d => d.date === curDate);
+                if(targetIndex !== -1) {
+                    customDiaries[targetIndex].text = updatedText;
+                } else {
+                    customDiaries.push({ date: curDate, weather: curWeather, text: updatedText });
+                }
+                localStorage.setItem('my_saved_diaries', JSON.stringify(customDiaries));
                 
-                // 💡 这里可以进一步把修改同步写回对应的 onclick 属性中，防止切走后失效
-                updateCurrentMenuData(updatedText);
+                
+                updateCurrentMenuData(curDate, curWeather, updatedText);
             }
         }
 
@@ -433,7 +456,7 @@
             }
         }
 
-        // 3. 动态添加新日记节点的方法（带天气支持）
+        // 3. 动态添加新日记节点的方法
         function addNewDiaryLog() {
             const dateInput = document.getElementById('new-diary-date').value.trim();
             const weatherInput = document.getElementById('new-diary-weather').value;
@@ -445,6 +468,9 @@
             }
 
             const formattedDate = `2026/${dateInput}`;
+            const newDiaryObj = { date: formattedDate, weather: weatherInput, text: textInput };
+            customDiaries.push(newDiaryObj);
+            localStorage.setItem('my_saved_diaries', JSON.stringify(customDiaries));
 
             // 创建一个新的右侧列表点击项
             const menuList = document.getElementById('diary-log-menu');
