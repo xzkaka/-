@@ -347,15 +347,56 @@
     </div>
 
     <script>
-       
-        function switchDiary(date, text) {
+        let isEditing = false;
+        
+        function switchDiary(date, weather, text) {
+            if (isEditing) toggleEditDiary();
             document.getElementById('diary-current-date').innerText = date;
+            document.getElementById('diary-current-weather').innerText = weather;
             document.getElementById('diary-display-area').innerText = text;
+            
+        }
+        function toggleEditDiary() {
+            const displayArea = document.getElementById('diary-display-area');
+            const editInput = document.getElementById('diary-edit-input');
+            const actionBtn = document.getElementById('btn-edit-action');
+            if (!isEditing) {
+                editInput.value = displayArea.innerText;
+                displayArea.style.display = 'none';
+                editInput.style.display = 'block';
+                actionBtn.innerText = '💾 Save';
+                isEditing = true;
+            }else{
+                const updatedText = editInput.value.trim();
+                if(!updatedText) {
+                    alert('The content cannot be empty');
+                    return;
+                }
+                displayArea.innerText = updatedText;
+                editInput.style.display = 'none';
+                displayArea.style.display = 'block';
+                actionBtn.innerText = '✍️ Edit';
+                isEditing = false;
+                updateCurrentMenuData(updatedText);
+            }
+        }
+        function updateCurrentMenuData(newText) {
+            const curDate = document.getElementById('diary-current-date').innerText;
+            const menuList = document.getElementById('diary-log-menu').children;
+            for(let li of menuList) {
+                if(li.innerText.includes(curDate.replace('2026/', ''))) {
+                    const curWeather = document.getElementById('diary-current-weather').innerText;
+                    const safeText = newText.replace(/'/g, "\\'").replace(/\n/g, "\\n");
+                    li.setAttribute('onclick', `switchDiary('${curDate}', '${curWeather}', '${safeText}')`);
+                    break;
+                }
+            }
         }
 
         
         function addNewDiaryLog() {
             const dateInput = document.getElementById('new-diary-date').value.trim();
+            const weatherInput = document.getElementById('new-diary-weather').value;
             const textInput = document.getElementById('new-diary-text').value.trim();
 
             if (!dateInput || !textInput) {
