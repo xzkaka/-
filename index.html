@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +17,6 @@
             box-sizing: border-box;
         }
         
-        /* 1. 开启全页面的平滑滚动，让跳转像翻书一样温柔 */
         html {
             scroll-behavior: smooth;
         }
@@ -54,7 +54,6 @@
             border-bottom: 2px solid #e0d0c0;
             transition: all 0.3s ease;
         }
-        /* 不规则剪纸手账效果 */
         .nav-tag:nth-child(1) { transform: rotate(-3deg); background: #fcf6ec; border-radius: 255px 15px 225px 15px/15px 225px 15px 255px; }
         .nav-tag:nth-child(2) { transform: rotate(2deg); background: #f3f8f2; border-radius: 15px 225px 15px 255px/255px 15px 225px 15px; }
         .nav-tag:nth-child(3) { transform: rotate(-1.5deg); background: #fcf0f0; border-radius: 20px 15px 30px 12px/12px 25px 12px 30px; }
@@ -69,12 +68,11 @@
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 320px;
+            grid-template-columns: 1fr 340px;
             gap: 40px;
             position: relative;
         }
 
-        /* 左侧：内容与照片画布区（滚动锚点有一定偏移量防导航栏遮挡） */
         .canvas-area {
             position: relative;
             min-height: 850px;
@@ -88,7 +86,7 @@
             gap: 35px;
         }
 
-        /* 备忘录便签纸区域 */
+        /* 备忘录便签纸 */
         .memo-note {
             background: #fffdf3;
             color: #635347;
@@ -96,13 +94,10 @@
             box-shadow: 5px 10px 20px rgba(0,0,0,0.08);
             transform: rotate(2deg);
             position: relative;
-            background-image: linear-gradient(#e8e3cf 1px, transparent 1px);
             background-size: 100% 28px;
             line-height: 28px;
             padding-top: 35px;
-            scroll-margin-top: 140px; /* 防止滚动跳转时顶部被导航栏挡住 */
         }
-        /* 红色复古小图钉 */
         .memo-note::after {
             content: "";
             position: absolute;
@@ -133,7 +128,7 @@
             cursor: pointer;
         }
 
-        /* 复古绿手账分类栏 */
+      
         .sidebar-box {
             background: #738276; 
             color: #fff;
@@ -142,9 +137,7 @@
             box-shadow: 4px 8px 20px rgba(0,0,0,0.1);
             transform: rotate(-1deg);
             position: relative;
-            scroll-margin-top: 140px; 
         }
-        /* 顶部贴着的纸胶带效果 */
         .sidebar-box::before {
             content: "";
             position: absolute;
@@ -154,7 +147,6 @@
             height: 25px;
             background: rgba(233, 216, 200, 0.7);
             transform: rotate(-2deg);
-            box-shadow: 1px 1px 3px rgba(0,0,0,0.05);
         }
         .sidebar-box h3 {
             font-size: 1.2rem;
@@ -164,201 +156,210 @@
             text-align: center;
             letter-spacing: 2px;
         }
-        .sidebar-box ul {
-            list-style: none;
-        }
-        
-        /* ✨ 关键修饰：在这里加了 cursor: pointer 让列表项全部变成可以点击的“小手” */
+        .sidebar-box ul { list-style: none; }
         .sidebar-box ul li {
             padding: 8px 5px;
             font-size: 0.95rem;
-            cursor: pointer; /* 鼠标悬停变小手 */
+            cursor: pointer; 
             transition: all 0.2s;
             border-radius: 4px;
         }
         .sidebar-box ul li:hover {
             background: rgba(255,255,255,0.15);
-            padding-left: 10px; /* 悬停时微微右滑，增加动态手账感 */
+            padding-left: 10px; 
         }
 
-        /* --- Canva 组件绝对定位微调 --- */
-        .canva-polaroid1{
-            position: absolute;
-            top: 20px;
-            left: 2%;
-            transform: rotate(-3deg);
-            width: 260px;
-            box-shadow: 5px 8px 20px rgba(0,0,0,0.12);
-            border: 10px solid #fff; 
-            border-bottom: 35px solid #fff;
-        }
-        .canva-note1 {
-            position: absolute;
-            top: -20px;
-            right: 5%;
-            transform: rotate(2.5deg);
-            width: 320px;
-            z-index: 10;
-        }
-        .canva-note2 {
-            position: absolute;
-            top: 320px;
-            left: 5%;
-            transform: rotate(-1.8deg);
-            width: 300px;
-            z-index: 10;
-        }
-        .canva-note3 {
-            position: absolute;
-            top: 70px;
-            left: 30%;
-            transform: rotate(-1.5deg);
-            width:300px;
-            z-index: 1;
-           
-        }
-        .canva-note4 {
-            position: absolute;
-            top: 400px;
-            left: 36%;
-            transform: rotate(-2.5deg);
-            width: 340px;
-
-        }
-        .canva-polaroid2 {
-            position: absolute;
-            top: 380px;
-            right: 2%;
-            transform: rotate(1.2deg);
-            width: 290px;
-            box-shadow: 5px 8px 20px rgba(0,0,0,0.12);
-            border: 10px solid #fff; 
-            border-bottom: 35px solid #fff;
-        }
-        .paper-card {
-        /* ... 你原本的其他样式 ... */
-                  /* 限制卡片的最大高度，再长的日记也不会撑爆网页 */
-                  /* 内容变长时，自动允许上下滚动 */
-            padding-right: 15px;     /* 留出一点右边距，防止字贴着滚动条 */
-        }
-
-/* 隐藏自带的丑丑的灰色滚动条，保持手账纯净感 */
-       .paper-card::-webkit-scrollbar {
-            width: 100px; 
-        }
-        #diary-display {
-        white-space: pre-wrap; /* 保留换行 */
-        line-height: 1.8;
-        font-family: inherit;
-        transition: all 0.5s ease; /* 让内容出现时有个顺滑的过程 */
-        }
-
-        /* 响应式设计：小屏幕自动变单栏 */
-        @media (max-width: 900px) {
-            .main-container {
-                grid-template-columns: 1fr;
-            }
-            .handbook-sidebar {
-                margin-top: 450px; 
-            }
-            .handbook-nav {
-                width: 90%;
-                justify-content: center;
-            }
-        }
-        .canvas-area a {
-            display: inline-block;
-            transition: transform 0.3s ease;
-    }
-
-        .canvas-area a:hover {
-           .canva-polaroid1:hover { transform: rotate(-3deg) scale(1.05); }
-           .canva-note1:hover { transform: rotate(2.5deg) scale(1.05); }
-           .canva-note2:hover { transform: rotate(-1.8deg) scale(1.05); }
-           .canva-note3:hover { transform: rotate(-2.5deg) scale(1.05); }
-           .canva-note4:hover { transform: rotate(-2.5deg) scale(1.05); }
-           .canva-polaroid2:hover { transform: rotate(1deg) scale(1.05); }
-    }
        
-    
+        .dynamic-diary-card {
+            background: #fff;
+            border: 1px solid #f0e6da;
+            border-bottom: 4px solid #ccbcac;
+            border-radius: 6px;
+            padding: 25px 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transform: rotate(1deg);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        /* 胶带修饰 */
+        .dynamic-diary-card::before {
+            content: "✨ CURRENT MEMORY";
+            position: absolute;
+            top: -12px;
+            left: 15px;
+            background: rgba(217, 230, 219, 0.9);
+            color: #5c6b5e;
+            padding: 2px 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            transform: rotate(-2deg);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.03);
+            border-left: 2px dashed #738276;
+        }
+        .diary-meta-header {
+            font-size: 1.05rem;
+            color: #aa8c74;
+            font-weight: bold;
+            margin-bottom: 12px;
+            border-bottom: 1px dashed #e9d8c8;
+            padding-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+        #diary-display-area {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #5a4b41;
+            white-space: pre-wrap; /* 让文字换行自然 */
+            min-height: 100px;
+            animation: fadeInText 0.4s ease-in-out;
+        }
+        @keyframes fadeInText {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        
+        .quick-write-box {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #e9d8c8;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .quick-write-box input, .quick-write-box textarea {
+            border: 1px solid #e9d8c8;
+            background: #fffdfb;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            outline: none;
+        }
+        .quick-write-box button {
+            background: #aa8c74;
+            color: white;
+            border: none;
+            padding: 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        .quick-write-box button:hover { background: #8e735c; }
+
+      
+        .canva-polaroid1{ position: absolute; top: 20px; left: 2%; transform: rotate(-3deg); width: 260px; box-shadow: 5px 8px 20px rgba(0,0,0,0.12); border: 10px solid #fff; border-bottom: 35px solid #fff; }
+        .canva-note1 { position: absolute; top: -20px; right: 5%; transform: rotate(2.5deg); width: 260px; z-index: 10; }
+        .canva-note2 { position: absolute; top: 320px; left: 5%; transform: rotate(-1.8deg); width: 260px; z-index: 10; }
+        .canva-note3 { position: absolute; top: 70px; left: 30%; transform: rotate(-1.5deg); width:260px; z-index: 1; }
+        .canva-note4 { position: absolute; top: 400px; left: 36%; transform: rotate(-2.5deg); width: 260px; }
+        .canva-polaroid2 { position: absolute; top: 380px; right: 2%; transform: rotate(1.2deg); width: 260px; box-shadow: 5px 8px 20px rgba(0,0,0,0.12); border: 10px solid #fff; border-bottom: 35px solid #fff; }
+
+        .canvas-area a { display: inline-block; transition: transform 0.3s ease; }
+        .canvas-area a:hover { transform: scale(1.05); z-index: 50; }
+
+        @media (max-width: 900px) {
+            .main-container { grid-template-columns: 1fr; }
+            .handbook-sidebar { margin-top: 450px; }
+            .handbook-nav { width: 90%; justify-content: center; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- 顶部分离式导航栏（使用 # 号关联到下方区块的 id） -->
     <nav class="handbook-nav">
-        <a href="diary.html" class="nav-tag">📖 A place to write casually</a>
-        <a href="ins.html" class="nav-tag">📌 Interested websites</a>
-        <a href="journey.html" class="nav-tag">✨ Accumulation of memory</a>
+        <a href="diary.html" class="nav-tag">📖 Casually Write</a>
+        <a href="ins.html" class="nav-tag">📌 Interested Sites</a>
+        <a href="journey.html" class="nav-tag">✨ Memory Box</a>
     </nav>
 
-    <!-- 页面主结构 -->
     <div class="main-container">
         
-        <!-- 左侧：Canva 手账画布区（绑了 id="my-handbook"） -->
         <div class="canvas-area" id="my-handbook">
-            <a href="photo.html">
-                <img class="canva-polaroid1" src="images/view2.jpg" width="260" loading="lazy" alt="Photo Album">
-            </a>
-            <a href="delicious.html">
-                <img class="canva-note1" src="images/noddles2.jpg" width="260" loading="lazy" alt="Delicious Food">
-            </a>
-             <a href="delicious.html">
-                <img class="canva-note4" src="images/noddles.jpg" width="260" loading="lazy" alt="Delicious Food">
-            </a>
-            <a href="journey.html">
-                <img class="canva-note2" src="images/sea2.jpg" width="260" loading="lazy" alt="Journey Memory">
-            </a>
-            <a href="journey.html">
-                <img class="canva-note3" src="images/sea4.jpg" width="260" loading="lazy" alt="Journey Memory">
-            </a>
-            <a href="photo.html">
-                <img class="canva-polaroid2" src="images/train1.jpg" width="260" loading="lazy" alt="Photo Album">
-            </a>
-            
-           
+            <a href="photo.html"><img class="canva-polaroid1" src="images/view2.jpg" alt="Photo"></a>
+            <a href="delicious.html"><img class="canva-note1" src="images/noddles2.jpg" alt="Food"></a>
+            <a href="delicious.html"><img class="canva-note4" src="images/noddles.jpg" alt="Food"></a>
+            <a href="journey.html"><img class="canva-note2" src="images/sea2.jpg" alt="Journey"></a>
+            <a href="journey.html"><img class="canva-note3" src="images/sea4.jpg" alt="Journey"></a>
+            <a href="photo.html"><img class="canva-polaroid2" src="images/train1.jpg" alt="Photo"></a>
         </div>
 
-        <!-- 右侧：手账功能侧边栏 -->
         <aside class="handbook-sidebar">
             
-            <!-- 备忘录便签纸（绑了 id="my-memo"） -->
             <div class="memo-note" id="my-memo">
                 <div class="memo-title">📌 Reminder / TODO</div>
-                <div class="memo-item">
-                    <input type="checkbox" id="m1" checked> <label for="m1">Organize oneself</label>
-                </div>
-                <div class="memo-item">
-                    <input type="checkbox" id="m2"> <label for="m2">Listen to more music</label>
-                </div>
-                <div class="memo-item">
-                    <input type="checkbox" id="m3"> <label for="m3">Stretching the mood</label>
-                </div>
-                <div class="memo-item">
-                    <input type="checkbox" id="m4"> <label for="m4">and....</label>
-                </div>
+                <div class="memo-item"><input type="checkbox" id="m1" checked> <label for="m1">Organize oneself</label></div>
+                <div class="memo-item"><input type="checkbox" id="m2"> <label for="m2">Listen to more music</label></div>
+                <div class="memo-item"><input type="checkbox" id="m3"> <label for="m3">Stretching the mood</label></div>
             </div>
 
-            <!-- 复古绿日记分类栏（绑了 id="my-categories"） -->
             <div class="sidebar-box" id="my-categories">
-                <h3>📅navigation</h3>
-                <ul>
-                    <!-- 这里鼠标放上去已经是可爱的小手啦！ -->
-                    <li><a href="diary.html" style="text-decoration:none; color:inherit;">🎨 Record casually </a></li>
-                    <li><a href="photo.html" style="text-decoration:none; color:inherit;">📸 photo album </a></li>
-                    <li><a href="delicious.html" style="text-decoration:none; color:inherit;">🥘 delicious food </a></li>
-                    <li><a href="journey.html" style="text-decoration:none; color:inherit;">✈️ journey </a></li>
+                <h3>📅 Quick Diary Log</h3>
+                <ul id="diary-log-menu">
+                    <li onclick="switchDiary('2026/05/19', '🧸  I bought a delicious bread today')">📜 2026/05/19 · Sunny</li>
+                    <li onclick="switchDiary('2026/05/20', '🌊 Organized the phone photo album')">📜 2026/05/20 · Cloudy</li>
                 </ul>
             </div>
-            <div id="diary-section" class="paper-card card-diary1 tape-style"style="max-height: none; overflow: visible;">
-                <h4>🧸 2026/5/19 · sunny</h4>
-                <div id="diary-display">open...</div>
-              <!-- 用 iframe 把独立的文本文件无缝嵌入进来 -->
-              <iframe src="diary0519.txt" style="width:100%; height:180px; border:none; background:transparent;"></iframe>
-           </div>
+
+            <div class="dynamic-diary-card" id="diary-section">
+                <div class="diary-meta-header">
+                    <span id="diary-current-date">2026/05/19</span>
+                    <span>Diary 📖</span>
+                </div>
+                <div id="diary-display-area">🧸 I bought a delicious bread today </div>
+                
+                <div class="quick-write-box">
+                    <input type="text" id="new-diary-date" placeholder="input date ">
+                    <textarea id="new-diary-text" rows="2" placeholder="Write down the fragmented thoughts at this moment .."></textarea>
+                    <button onclick="addNewDiaryLog()">📌 Append to Log</button>
+                </div>
+            </div>
 
         </aside>
     </div>
 
+    <script>
+       
+        function switchDiary(date, text) {
+            document.getElementById('diary-current-date').innerText = date;
+            document.getElementById('diary-display-area').innerText = text;
+        }
+
+        
+        function addNewDiaryLog() {
+            const dateInput = document.getElementById('new-diary-date').value.trim();
+            const textInput = document.getElementById('new-diary-text').value.trim();
+
+            if (!dateInput || !textInput) {
+                alert('Please fill in the date and diary content🖋️');
+                return;
+            }
+
+            const formattedDate = `2026/${dateInput}`;
+
+            
+            const menuList = document.getElementById('diary-log-menu');
+            const newLi = document.createElement('li');
+            
+           
+            const safeText = textInput.replace(/'/g, "\\'").replace(/\n/g, "\\n");
+            
+            newLi.setAttribute('onclick', `switchDiary('${formattedDate}', '${safeText}')`);
+            newLi.innerHTML = `📜 ${formattedDate} · New Log`;
+            
+           
+            menuList.insertBefore(newLi, menuList.firstChild);
+
+            
+            switchDiary(formattedDate, textInput);
+
+          
+            document.getElementById('new-diary-date').value = '';
+            document.getElementById('new-diary-text').value = '';
+        }
+    </script>
 </body>
 </html>
