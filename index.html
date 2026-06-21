@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -259,7 +258,33 @@
         .canva-polaroid2 { position: absolute; top: 380px; right: 2%; transform: rotate(1.2deg); width: 260px; box-shadow: 5px 8px 20px rgba(0,0,0,0.12); border: 10px solid #fff; border-bottom: 35px solid #fff; }
 
         .canvas-area a { display: inline-block; transition: transform 0.3s ease; }
-        .canvas-area a:hover { transform: scale(1.05); z-index: 50; }
+        .canvas-area img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .canva-polaroid1:hover { 
+            transform: rotate(-3deg) scale(1.05); 
+            z-index: 99; 
+        }
+        .canva-note1:hover { 
+            transform: rotate(2.5deg) scale(1.05); 
+            z-index: 99; 
+        }
+        .canva-note2:hover { 
+            transform: rotate(-1.8deg) scale(1.05); 
+            z-index: 99; 
+        }
+        .canva-note3:hover { 
+            transform: rotate(-1.5deg) scale(1.05); 
+            z-index: 99; 
+        }
+        .canva-note4:hover { 
+            transform: rotate(-2.5deg) scale(1.05); 
+            z-index: 99; 
+        }
+        .canva-polaroid2:hover { 
+            transform: rotate(1.2deg) scale(1.05); 
+            z-index: 99; 
+        }
 
         @media (max-width: 900px) {
             .main-container { grid-template-columns: 1fr; }
