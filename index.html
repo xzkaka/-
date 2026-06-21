@@ -5,10 +5,10 @@
     <title>My Space</title>
     <style>
        @font-face {
-       font-family: 'bold'; 
-       src: url('bold.ttf') format('truetype'); 
-       font-weight: normal;
-       font-style: normal;
+           font-family: 'bold'; 
+           src: url('bold.ttf') format('truetype'); 
+           font-weight: normal;
+           font-style: normal;
        }
        * {
             margin: 0;
@@ -93,7 +93,6 @@
             box-shadow: 5px 10px 20px rgba(0,0,0,0.08);
             transform: rotate(2deg);
             position: relative;
-            background-size: 100% 28px;
             line-height: 28px;
             padding-top: 35px;
         }
@@ -127,7 +126,7 @@
             cursor: pointer;
         }
 
-      
+        /* 复古绿手账分类栏 */
         .sidebar-box {
             background: #738276; 
             color: #fff;
@@ -168,7 +167,7 @@
             padding-left: 10px; 
         }
 
-       
+        /* 动态日记展示卡片 */
         .dynamic-diary-card {
             background: #fff;
             border: 1px solid #f0e6da;
@@ -178,11 +177,9 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             transform: rotate(1deg);
             position: relative;
-            transition: all 0.4s ease;
         }
-        /* 胶带修饰 */
         .dynamic-diary-card::before {
-            content: "✨ CURRENT MEMORY";
+            content: "✨ DIARY LOG";
             position: absolute;
             top: -12px;
             left: 15px;
@@ -192,7 +189,6 @@
             font-size: 0.75rem;
             font-weight: bold;
             transform: rotate(-2deg);
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.03);
             border-left: 2px dashed #738276;
         }
         .diary-meta-header {
@@ -204,21 +200,53 @@
             padding-bottom: 6px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
+        
+        /* 增加：可以切换的天气、修改状态的输入框样式 */
+        .diary-info-top {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .edit-diary-btn {
+            background: none;
+            border: 1px dashed #aa8c74;
+            color: #aa8c74;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .edit-diary-btn:hover {
+            background: #fdf5ec;
+        }
+
         #diary-display-area {
             font-size: 0.95rem;
             line-height: 1.8;
             color: #5a4b41;
-            white-space: pre-wrap; /* 让文字换行自然 */
+            white-space: pre-wrap; 
             min-height: 100px;
-            animation: fadeInText 0.4s ease-in-out;
         }
-        @keyframes fadeInText {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
+        
+        /* 在线编辑状态下的文本框 */
+        #diary-edit-input {
+            width: 100%;
+            min-height: 100px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #5a4b41;
+            padding: 5px;
+            border: 1px solid #aa8c74;
+            background: #fffdf9;
+            outline: none;
+            display: none; /* 默认隐藏 */
         }
 
-        
+        /* 快捷写日记表单区域 */
         .quick-write-box {
             margin-top: 15px;
             padding-top: 15px;
@@ -227,7 +255,12 @@
             flex-direction: column;
             gap: 8px;
         }
-        .quick-write-box input, .quick-write-box textarea {
+        .form-row-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .quick-write-box input, .quick-write-box select, .quick-write-box textarea {
             border: 1px solid #e9d8c8;
             background: #fffdfb;
             padding: 6px 10px;
@@ -249,42 +282,24 @@
         }
         .quick-write-box button:hover { background: #8e735c; }
 
-      
-        .canva-polaroid1{ position: absolute; top: 20px; left: 2%; transform: rotate(-3deg); width: 300px; box-shadow: 5px 8px 20px rgba(0,0,0,0.12); border: 10px solid #fff; border-bottom: 35px solid #fff; }
-        .canva-note1 { position: absolute; top: -20px; right: 5%; transform: rotate(2.5deg); width: 320px; z-index: 10; }
-        .canva-note2 { position: absolute; top: 320px; left: 5%; transform: rotate(-1.8deg); width: 300px; z-index: 10; }
-        .canva-note3 { position: absolute; top: 70px; left: 33%; transform: rotate(-1.5deg); width: 290px; z-index: 1; }
-        .canva-note4 { position: absolute; top: 400px; left: 36%; transform: rotate(-2.5deg); width: 300px; }
-        .canva-polaroid2 { position: absolute; top: 380px; right: 2%; transform: rotate(1.2deg); width: 290px; box-shadow: 5px 8px 20px rgba(0,0,0,0.12); border: 10px solid #fff; border-bottom: 35px solid #fff; }
-
-        .canvas-area a { display: inline-block; transition: transform 0.3s ease; }
+       
         .canvas-area img {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .canva-polaroid1:hover { 
-            transform: rotate(-3deg) scale(1.05); 
-            z-index: 99; 
-        }
-        .canva-note1:hover { 
-            transform: rotate(2.5deg) scale(1.05); 
-            z-index: 99; 
-        }
-        .canva-note2:hover { 
-            transform: rotate(-1.8deg) scale(1.05); 
-            z-index: 99; 
-        }
-        .canva-note3:hover { 
-            transform: rotate(-1.5deg) scale(1.05); 
-            z-index: 99; 
-        }
-        .canva-note4:hover { 
-            transform: rotate(-2.5deg) scale(1.05); 
-            z-index: 99; 
-        }
-        .canva-polaroid2:hover { 
-            transform: rotate(1.2deg) scale(1.05); 
-            z-index: 99; 
-        }
+        .canva-polaroid1 { position: absolute; top: 20px; left: 2%; transform: rotate(-3deg); width:300px; box-shadow: 5px 8px 20px rgba(0,0,0,0.12); border: 10px solid #fff; border-bottom: 35px solid #fff; }
+        .canva-note1 { position: absolute; top: -20px; right: 5%; transform: rotate(2.5deg); width: 300px; z-index: 10; }
+        .canva-note2 { position: absolute; top: 320px; left: 5%; transform: rotate(-1.8deg); width: 280px; z-index: 10; }
+        .canva-note3 { position: absolute; top: 70px; left: 33%; transform: rotate(-1.5deg); width: 300px; z-index: 1; }
+        .canva-note4 { position: absolute; top: 400px; left: 36%; transform: rotate(-2.5deg); width: 280px; }
+        .canva-polaroid2 { position: absolute; top: 380px; right: 2%; transform: rotate(1.2deg); width: 270px; box-shadow: 5px 8px 20px rgba(0,0,0,0.12); border: 10px solid #fff; border-bottom: 35px solid #fff; }
+
+        /* 鼠标悬停只改变缩放和图层，不改变初始旋转角，杜绝无限抖动死循环 */
+        .canva-polaroid1:hover { transform: rotate(-3deg) scale(1.05); z-index: 99; }
+        .canva-note1:hover { transform: rotate(2.5deg) scale(1.05); z-index: 99; }
+        .canva-note2:hover { transform: rotate(-1.8deg) scale(1.05); z-index: 99; }
+        .canva-note3:hover { transform: rotate(-1.5deg) scale(1.05); z-index: 99; }
+        .canva-note4:hover { transform: rotate(-2.5deg) scale(1.05); z-index: 99; }
+        .canva-polaroid2:hover { transform: rotate(1.2deg) scale(1.05); z-index: 99; }
 
         @media (max-width: 900px) {
             .main-container { grid-template-columns: 1fr; }
@@ -324,21 +339,34 @@
             <div class="sidebar-box" id="my-categories">
                 <h3>📅 Quick Diary Log</h3>
                 <ul id="diary-log-menu">
-                    <li onclick="switchDiary('2026/05/19', '🥖  I bought a delicious bread today')">📜 2026/05/19 · Sunny</li>
-                    <li onclick="switchDiary('2026/05/20', '🌊 Organized the phone photo album')">📜 2026/05/20 · Cloudy</li>
+                    <li onclick="switchDiary('2026/05/19', '☀️ sunny', 'I found a coffee shop today and bought a delicious orange cake🍰')">📜 2026/05/19 · Sunny</li>
+                    <li onclick="switchDiary('2026/05/20', '☁️ cloudy', 'I have been studying diligently these past few days and feel like time has passed quickly')">📜 2026/05/20 · Cloudy</li>
                 </ul>
             </div>
 
             <div class="dynamic-diary-card" id="diary-section">
                 <div class="diary-meta-header">
-                    <span id="diary-current-date">2026/05/19</span>
-                    <span>Diary 📖</span>
+                    <div class="diary-info-top">
+                        <span id="diary-current-date">2026/05/19</span>
+                        <span id="diary-current-weather">☀️ sunny</span>
+                    </div>
+                    <button class="edit-diary-btn" id="btn-edit-action" onclick="toggleEditDiary()">✍️ Edit</button>
                 </div>
-                <div id="diary-display-area"> 🥖 I bought a delicious bread today </div>
+                
+                <div id="diary-display-area">I found a coffee shop today and bought a delicious orange cake🍰</div>
+                <textarea id="diary-edit-input"></textarea>
                 
                 <div class="quick-write-box">
-                    <input type="text" id="new-diary-date" placeholder="input date ">
-                    <textarea id="new-diary-text" rows="2" placeholder="Write down the fragmented thoughts at this moment .."></textarea>
+                    <div class="form-row-inputs">
+                        <input type="text" id="new-diary-date" placeholder=" data ">
+                        <select id="new-diary-weather">
+                            <option value="☀️ sunny">☀️ sunny</option>
+                            <option value="☁️ cloudy">☁️ cloudy</option>
+                            <option value="🌧️ rainy">🌧️ rainy</option>
+                            <option value="❄️ snowy">❄️ snowy</option>
+                        </select>
+                    </div>
+                    <textarea id="new-diary-text" rows="2" placeholder="Write down the fragmented thoughts at this moment..."></textarea>
                     <button onclick="addNewDiaryLog()">📌 Append to Log</button>
                 </div>
             </div>
@@ -347,26 +375,34 @@
     </div>
 
     <script>
+        // 存储当前被选中的日记的底层内容，方便修改
         let isEditing = false;
-        
+
+        // 1. 局部无缝刷新日记的方法（带天气支持）
         function switchDiary(date, weather, text) {
+            // 如果处于编辑状态，切换时强行先关闭编辑
             if (isEditing) toggleEditDiary();
+            
             document.getElementById('diary-current-date').innerText = date;
             document.getElementById('diary-current-weather').innerText = weather;
             document.getElementById('diary-display-area').innerText = text;
-            
         }
+
+        // 2. ✨ 新增：控制“编辑/保存”状态切换的方法
         function toggleEditDiary() {
             const displayArea = document.getElementById('diary-display-area');
             const editInput = document.getElementById('diary-edit-input');
             const actionBtn = document.getElementById('btn-edit-action');
+
             if (!isEditing) {
+                // 进入编辑状态
                 editInput.value = displayArea.innerText;
                 displayArea.style.display = 'none';
                 editInput.style.display = 'block';
                 actionBtn.innerText = '💾 Save';
                 isEditing = true;
-            }else{
+            } else {
+                // 保存并退出编辑状态
                 const updatedText = editInput.value.trim();
                 if(!updatedText) {
                     alert('The content cannot be empty');
@@ -377,9 +413,13 @@
                 displayArea.style.display = 'block';
                 actionBtn.innerText = '✍️ Edit';
                 isEditing = false;
+                
+                // 💡 这里可以进一步把修改同步写回对应的 onclick 属性中，防止切走后失效
                 updateCurrentMenuData(updatedText);
             }
         }
+
+        // 辅助：用来确保用户改完字后，点击右侧日期菜单不会被还原
         function updateCurrentMenuData(newText) {
             const curDate = document.getElementById('diary-current-date').innerText;
             const menuList = document.getElementById('diary-log-menu').children;
@@ -393,7 +433,7 @@
             }
         }
 
-        
+        // 3. 动态添加新日记节点的方法（带天气支持）
         function addNewDiaryLog() {
             const dateInput = document.getElementById('new-diary-date').value.trim();
             const weatherInput = document.getElementById('new-diary-weather').value;
@@ -406,23 +446,26 @@
 
             const formattedDate = `2026/${dateInput}`;
 
-            
+            // 创建一个新的右侧列表点击项
             const menuList = document.getElementById('diary-log-menu');
             const newLi = document.createElement('li');
             
-           
+            // 安全转义字符串
             const safeText = textInput.replace(/'/g, "\\'").replace(/\n/g, "\\n");
             
-            newLi.setAttribute('onclick', `switchDiary('${formattedDate}', '${safeText}')`);
-            newLi.innerHTML = `📜 ${formattedDate} · New Log`;
+            newLi.setAttribute('onclick', `switchDiary('${formattedDate}', '${weatherInput}', '${safeText}')`);
             
-           
+            // 提取天气小图标用来在目录列表展示
+            const weatherIcon = weatherInput.split(' ')[0];
+            newLi.innerHTML = `📜 ${formattedDate} · ${weatherIcon} New Log`;
+            
+            // 塞进列表头部
             menuList.insertBefore(newLi, menuList.firstChild);
 
-            
-            switchDiary(formattedDate, textInput);
+            // 立即让日记本显示出新日记
+            switchDiary(formattedDate, weatherInput, textInput);
 
-          
+            // 清空输入区
             document.getElementById('new-diary-date').value = '';
             document.getElementById('new-diary-text').value = '';
         }
